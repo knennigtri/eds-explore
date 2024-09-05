@@ -1,3 +1,9 @@
+.stockplex {
+  position: relative;
+  padding: 32px;
+  min-height: 50px;
+}
+
 .stockplex > ul {
   list-style: none;
   margin: 0;
