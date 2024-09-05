@@ -184,5 +184,34 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "stockplex",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "data",
+        "label": "Stock Data"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "data2",
+        "label": "Stock Data 2",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "symbol",
+        "label": "Symbol"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "summary",
+        "label": "Summary"
+      }
+    ]
   }
 ]
