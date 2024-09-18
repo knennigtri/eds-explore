@@ -201,9 +201,9 @@
         "label": "Symbol"
       },
       {
-        "component": "text_description",
+        "component": "text",
         "valueType": "string",
-        "name": "summary",
+        "name": "summary_description",
         "label": "Summary"
       },
       {
