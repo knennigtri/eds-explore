@@ -1,10 +1,10 @@
-import {
-  decorateMain,
-} from '../../scripts/scripts.js';
+// import {
+//   decorateMain,
+// } from '../../scripts/scripts.js';
 
-import {
-  loadBlocks,
-} from '../../scripts/aem.js';
+// import {
+//   loadBlocks,
+// } from '../../scripts/aem.js';
 
 /**
  * Loads a fragment.
@@ -46,18 +46,18 @@ export default async function decorate(block) {
   // sWrapper.replaceChildren(blockquote);
 
   const link = block.querySelector('a');
-  const path = link ? link.getAttribute('href') : block.textContent.trim();
+  let path = link ? link.getAttribute('href') : block.textContent.trim();
   const dirs = path.split('/');
   const symbolText = dirs[dirs.length - 1];
 
   const symbolTitle = document.createfinElement('h2');
-  symbolTitle.textContent = symbolText ? symbolText : "Err"
+  symbolTitle.textContent = symbolText;
 
-
-  const fragment = await loadStockData(path+"/trade");
+  path += '/trade';
+  const fragment = await loadStockData(path);
   if (fragment) {
-    symbolData = document.createfinElement('p');
-    symbolData = textContent = fragment;
+    const symbolData = document.createfinElement('p');
+    symbolData.textContent = fragment;
     // const fragmentSection = fragment.querySelector(':scope .section');
     // if (fragmentSection) {
     //   block.classList.add(...fragmentSection.classList);
