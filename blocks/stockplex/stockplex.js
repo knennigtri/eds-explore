@@ -17,8 +17,8 @@ export async function loadStockData(path) {
     path = path.replace(/(\.plain)?\.json/, '');
     const resp = await fetch(`${path}.json`);
     if (resp.ok) {
-      console.log(resp.json())
-      console.log(resp.text())
+      console.log(resp.json());
+      console.log(resp.text());
       return resp.text();
       // const main = document.createElement('main');
       // main.innerHTML = await resp.text();
