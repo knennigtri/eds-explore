@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p140259-e1432979.adobeaemcloud.com/bin/franklin.delivery/knennigtri/eds-explore/main"
+    url: "https://author-p140373-e1433418.adobeaemcloud.com/bin/franklin.delivery/knennigtri/eds-explore/main"
     type: "markup"
     suffix: ".html"
