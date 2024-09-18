@@ -52,7 +52,7 @@ export default async function decorate(block) {
   const dirs = path.split('/');
   const symbolText = dirs[dirs.length - 1];
 
-  const symbolTitle = document.createfinElement('h2');
+  const symbolTitle = document.createElement('h2');
   symbolTitle.textContent = symbolText;
 
   path += '/trade';
