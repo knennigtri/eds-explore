@@ -17,24 +17,10 @@ export async function loadStockData(path) {
     path = path.replace(/(\.plain)?\.html/, '');
     const resp = await fetch(`${path}.json`);
     if (resp.ok) {
+      console('resp OK');
       console.log(resp.json());
       console.log(resp.text());
       return resp.text();
-      // const main = document.createElement('main');
-      // main.innerHTML = await resp.text();
-
-      // // reset base path for media to fragment base
-      // const resetAttributeBase = (tag, attr) => {
-      //   main.querySelectorAll(`${tag}[${attr}^="./media_"]`).forEach((elem) => {
-      //     elem[attr] = new URL(elem.getAttribute(attr), new URL(path, window.location)).href;
-      //   });
-      // };
-      // resetAttributeBase('img', 'src');
-      // resetAttributeBase('source', 'srcset');
-
-      // decorateMain(main);
-      // await loadBlocks(main);
-      // return main;
     }
   }
   return null;
@@ -42,20 +28,18 @@ export async function loadStockData(path) {
 
 export default async function decorate(block) {
   const [sWrapper] = block.children;
-  console.log(sWrapper);
 
   const aemContent = block.querySelector('a');
-  let path = aemContent ? aemContent.getAttribute('title') : block.textContent.trim();
+  const path = aemContent ? aemContent.getAttribute('title') : block.textContent.trim();
   const dirs = path.split('/');
   const symbolText = dirs[dirs.length - 1];
 
-  const symbolTitle = document.createElement('h2');
-  symbolTitle.textContent = symbolText;
+  const titleElement = document.createElement('h2');
+  titleElement.textContent = symbolText;
 
-  path += '/trade';
-  let stockData = await loadStockData(path);
+  const redirectPath = `/stocks/${symbolText}/trade`;
 
-  stockData = {
+  let stockData = {
     'jcr:primaryType': 'nt:unstructured',
     week52Low: 498.1,
     week52High: 520.48,
@@ -71,9 +55,11 @@ export default async function decorate(block) {
     openPrice: 514.13,
     lastTrade: 518.97,
   };
+  stockData = await loadStockData(redirectPath);
 
+  let tableBody = '';
   if (stockData) {
-    const tableBody = document.createElement('p');
+    tableBody = document.createElement('p');
     Object.entries(stockData).forEach(([key, value]) => {
       // Create a new row
       if (key !== 'jcr:primaryType') {
@@ -95,6 +81,8 @@ export default async function decorate(block) {
         tableBody.appendChild(row);
       }
     });
-    sWrapper.replaceChildren(tableBody);
+    const newElementsArray = [titleElement, tableBody];
+
+    sWrapper.replaceChildren(...newElementsArray);
   }
 }

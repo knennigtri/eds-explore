@@ -3,6 +3,6 @@
     "/content/eds-explore/:/",
     "/content/eds-explore/configuration:/.helix/config.json",
     "/content/eds-explore/redirects:/redirects.json",
-    "/content/stocks/:/"
+    "/content/stocks/:/trade.json"
   ]
 }
