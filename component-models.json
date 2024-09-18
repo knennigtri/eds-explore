@@ -191,16 +191,17 @@
       {
         "component": "aem-content",
         "name": "data",
+        "root": "/content/stocks",
         "label": "Stock Data"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "symbol",
+        "name": "symbol_title",
         "label": "Symbol"
       },
       {
-        "component": "text",
+        "component": "text_description",
         "valueType": "string",
         "name": "summary",
         "label": "Summary"
