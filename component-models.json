@@ -189,12 +189,6 @@
     "id": "stockplex",
     "fields": [
       {
-        "component": "aem-content",
-        "name": "data",
-        "root": "/content/stocks",
-        "label": "Stock Data"
-      },
-      {
         "component": "text",
         "valueType": "string",
         "name": "symbol_title",
@@ -205,6 +199,12 @@
         "valueType": "string",
         "name": "summary_description",
         "label": "Summary"
+      },
+      {
+        "component": "aem-content",
+        "name": "data",
+        "root": "/content/stocks",
+        "label": "Stock Data"
       },
       {
         "component": "select",

@@ -8,13 +8,13 @@
 
 /**
  * Loads a fragment.
- * @param {string} path The path to the fragment
- * @returns {HTMLElement} The root element of the fragment
+ * @param {string} path The path in the JCR
+ * @returns {HTMLElement} The root element in the JCR
  */
 export async function loadStockData(path) {
   if (path && path.startsWith('/')) {
     // eslint-disable-next-line no-param-reassign
-    path = path.replace(/(\.plain)?\.json/, '');
+    path = path.replace(/(\.plain)?\.html/, '');
     const resp = await fetch(`${path}.json`);
     if (resp.ok) {
       console.log(resp.json());
@@ -41,14 +41,11 @@ export async function loadStockData(path) {
 }
 
 export default async function decorate(block) {
-  // const [sWrapper] = block.children;
+  const [sWrapper] = block.children;
+  console.log(sWrapper);
 
-  // const blockquote = document.createElement('blockquote');
-  // blockquote.textContent = sWrapper.textContent.trim();
-  // sWrapper.replaceChildren(blockquote);
-
-  const link = block.querySelector('a');
-  let path = link ? link.getAttribute('href') : block.textContent.trim();
+  const aemContent = block.querySelector('a');
+  let path = aemContent ? aemContent.getAttribute('title') : block.textContent.trim();
   const dirs = path.split('/');
   const symbolText = dirs[dirs.length - 1];
 
@@ -56,15 +53,48 @@ export default async function decorate(block) {
   symbolTitle.textContent = symbolText;
 
   path += '/trade';
-  const fragment = await loadStockData(path);
-  if (fragment) {
-    const symbolData = document.createElement('p');
-    symbolData.textContent = fragment;
-    // const fragmentSection = fragment.querySelector(':scope .section');
-    // if (fragmentSection) {
-    //   block.classList.add(...fragmentSection.classList);
-    //   block.classList.remove('section');
-    //   block.replaceChildren(...fragmentSection.childNodes);
-    // }
+  let stockData = await loadStockData(path);
+
+  stockData = {
+    'jcr:primaryType': 'nt:unstructured',
+    week52Low: 498.1,
+    week52High: 520.48,
+    ytdPercentageChange: 0.39365408535881957,
+    sector: 'Software',
+    timeOfUpdate: '07:16 AM EST',
+    upDown: 4.44,
+    volume: 1591582,
+    rangeHigh: 515.05,
+    companyName: 'Adobe, Inc.',
+    dayOfLastUpdate: 'Sun December 1, 2019',
+    rangeLow: 509.37,
+    openPrice: 514.13,
+    lastTrade: 518.97,
+  };
+
+  if (stockData) {
+    const tableBody = document.createElement('p');
+    Object.entries(stockData).forEach(([key, value]) => {
+      // Create a new row
+      if (key !== 'jcr:primaryType') {
+        const row = document.createElement('tr');
+
+        // Create cells for key and value
+        const keyCell = document.createElement('td');
+        const valueCell = document.createElement('td');
+
+        // Set text content for cells
+        keyCell.textContent = key;
+        valueCell.textContent = value;
+
+        // Append cells to the row
+        row.appendChild(keyCell);
+        row.appendChild(valueCell);
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      }
+    });
+    sWrapper.replaceChildren(tableBody);
   }
 }
