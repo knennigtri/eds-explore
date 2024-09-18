@@ -38,13 +38,16 @@ export async function loadStockData(path) {
 }
 
 export default async function decorate(block) {
-  const [sWrapper] = block.children;
+  // const [sWrapper] = block.children;
 
-  const blockquote = document.createElement('blockquote');
-  blockquote.textContent = sWrapper.textContent.trim();
-  sWrapper.replaceChildren(blockquote);
+  // const blockquote = document.createElement('blockquote');
+  // blockquote.textContent = sWrapper.textContent.trim();
+  // sWrapper.replaceChildren(blockquote);
 
-  const fragment = await loadFragment(path);
+  const link = block.querySelector('a');
+  const path = link ? link.getAttribute('href') : block.textContent.trim();
+
+  const fragment = await loadStockData(path);
   if (fragment) {
     const fragmentSection = fragment.querySelector(':scope .section');
     if (fragmentSection) {
