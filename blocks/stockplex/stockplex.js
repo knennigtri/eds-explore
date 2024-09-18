@@ -17,6 +17,8 @@ export async function loadStockData(path) {
     path = path.replace(/(\.plain)?\.json/, '');
     const resp = await fetch(`${path}.json`);
     if (resp.ok) {
+      console.log(resp.json())
+      console.log(resp.text())
       return resp.text();
       // const main = document.createElement('main');
       // main.innerHTML = await resp.text();
@@ -56,7 +58,7 @@ export default async function decorate(block) {
   path += '/trade';
   const fragment = await loadStockData(path);
   if (fragment) {
-    const symbolData = document.createfinElement('p');
+    const symbolData = document.createElement('p');
     symbolData.textContent = fragment;
     // const fragmentSection = fragment.querySelector(':scope .section');
     // if (fragmentSection) {
