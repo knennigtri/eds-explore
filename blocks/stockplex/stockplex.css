@@ -35,3 +35,25 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+.stockplex > tbody > tr > td {
+  padding-right: 1em;
+}
+
+/* Default: Two-column layout */
+.stockplex.block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column1, .column2 {
+  width: 50%;
+  padding: 0.5em;
+}
+
+/* Media query: Single-column layout for screens 400px or less */
+@media (max-width: 400px) {
+  .column1, .column2 {
+    width: 100%;
+  }
+}
