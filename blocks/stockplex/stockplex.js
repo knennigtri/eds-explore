@@ -1,11 +1,3 @@
-// import {
-//   decorateMain,
-// } from '../../scripts/scripts.js';
-
-// import {
-//   loadBlocks,
-// } from '../../scripts/aem.js';
-
 /**
  * Loads a fragment.
  * @param {string} path The path in the JCR
@@ -30,14 +22,14 @@ export default async function decorate(block) {
   const [sWrapper] = block.children;
 
   const aemContent = block.querySelector('a');
-  const path = aemContent ? aemContent.getAttribute('title') : block.textContent.trim();
+  let path = aemContent ? aemContent.getAttribute('title') : block.textContent.trim();
   const dirs = path.split('/');
   const symbolText = dirs[dirs.length - 1];
 
   const titleElement = document.createElement('h2');
   titleElement.textContent = symbolText;
 
-  const redirectPath = `/stocks/${symbolText}/trade`;
+  path += '/trade';
 
   let stockData = {
     'jcr:primaryType': 'nt:unstructured',
@@ -55,33 +47,41 @@ export default async function decorate(block) {
     openPrice: 514.13,
     lastTrade: 518.97,
   };
-  stockData = await loadStockData(redirectPath);
+  // stockData = await loadStockData(redirectPath);
 
-  let tableBody = '';
   if (stockData) {
-    tableBody = document.createElement('p');
+    const originalTableBody = document.createElement('tbody');
+    const table1Body = document.createElement('tbody');
+    table1Body.className = 'column1';
+    const table2Body = document.createElement('tbody');
+    table2Body.className = 'column2';
+
     Object.entries(stockData).forEach(([key, value]) => {
-      // Create a new row
       if (key !== 'jcr:primaryType') {
         const row = document.createElement('tr');
-
-        // Create cells for key and value
         const keyCell = document.createElement('td');
         const valueCell = document.createElement('td');
-
-        // Set text content for cells
         keyCell.textContent = key;
         valueCell.textContent = value;
-
-        // Append cells to the row
         row.appendChild(keyCell);
         row.appendChild(valueCell);
-
-        // Append the row to the table body
-        tableBody.appendChild(row);
+        originalTableBody.appendChild(row);
       }
     });
-    const newElementsArray = [titleElement, tableBody];
+
+    // Split the rows into two tables
+    const rows = Array.from(originalTableBody.querySelectorAll('tr'));
+    const half = Math.ceil(rows.length / 2);
+
+    rows.forEach((row, index) => {
+      if (index < half) {
+        table1Body.appendChild(row);
+      } else {
+        table2Body.appendChild(row);
+      }
+    });
+
+    const newElementsArray = [titleElement, table1Body, table2Body];
 
     sWrapper.replaceChildren(...newElementsArray);
   }
