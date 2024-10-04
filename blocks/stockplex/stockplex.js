@@ -10,8 +10,6 @@ export async function loadStockData(path) {
     const resp = await fetch(`${path}.json`);
     if (resp.ok) {
       console('resp OK');
-      console.log(resp.json());
-      console.log(resp.text());
       return resp.text();
     }
   }
@@ -31,7 +29,7 @@ export default async function decorate(block) {
 
   path += '/trade';
 
-  let stockData = {
+  const stockData = {
     'jcr:primaryType': 'nt:unstructured',
     week52Low: 498.1,
     week52High: 520.48,
@@ -47,7 +45,7 @@ export default async function decorate(block) {
     openPrice: 514.13,
     lastTrade: 518.97,
   };
-  // stockData = await loadStockData(redirectPath);
+  // const stockData = await loadStockData(redirectPath);
 
   if (stockData) {
     const originalTableBody = document.createElement('tbody');
