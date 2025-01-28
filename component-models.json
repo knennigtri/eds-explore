@@ -191,50 +191,5 @@
         "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "stockplex",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "symbol_title",
-        "label": "Symbol"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "summary_description",
-        "label": "Summary"
-      },
-      {
-        "component": "aem-content",
-        "name": "data",
-        "root": "/content/stocks",
-        "label": "Stock Data"
-      },
-      {
-        "component": "select",
-        "name": "classes",
-        "value": "",
-        "label": "Background Color",
-        "description": "The marquee background color",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Red",
-            "value": "bg-red"
-          },
-          {
-            "name": "Green",
-            "value": "bg-green"
-          },
-          {
-            "name": "Blue",
-            "value": "bg-blue"
-          }
-        ]
-      }
-    ]
   }
 ]
