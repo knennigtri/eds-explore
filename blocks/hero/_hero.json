@@ -40,6 +40,13 @@
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "text_cta",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
         }
       ]
     }
