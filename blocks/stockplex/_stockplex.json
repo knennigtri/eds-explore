@@ -25,18 +25,18 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "symbol_title",
+          "name": "stockplexText_title",
           "label": "Symbol"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "symbol_summary",
+          "name": "stockplexText_summary",
           "label": "Summary"
         },
         {
           "component": "aem-content",
-          "name": "symbol_data",
+          "name": "stockplexText_data",
           "root": "/content/stocks",
           "label": "Stock Data"
         },
