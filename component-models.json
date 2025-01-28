@@ -196,28 +196,36 @@
     "id": "stockplex",
     "fields": [
       {
-        "component": "text",
+        "component": "select",
         "valueType": "string",
-        "name": "stockplexText_title",
-        "label": "Symbol"
+        "name": "stockplexInfo_title",
+        "label": "Symbol",
+        "options": [
+          {
+            "name": "ADBE",
+            "value": "adbe"
+          },
+          {
+            "name": "MSFT",
+            "value": "msft"
+          },
+          {
+            "name": "GOOG",
+            "value": "goog"
+          }
+        ]
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "stockplexText_summary",
+        "name": "stockplexInfo_text",
         "label": "Summary"
       },
       {
-        "component": "aem-content",
-        "name": "stockplexText_data",
-        "root": "/content/stocks",
-        "label": "Stock Data"
-      },
-      {
         "component": "select",
-        "name": "classes",
+        "name": "style",
         "value": "",
-        "label": "Background Color",
+        "label": "Style",
         "description": "The marquee background color",
         "valueType": "string",
         "options": [
