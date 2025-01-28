@@ -178,14 +178,14 @@
       },
       {
         "component": "richtext",
-        "name": "text",
+        "name": "textContent_text",
         "value": "",
         "label": "Text",
         "valueType": "string"
       },
       {
         "component": "aem-content",
-        "name": "text_cta",
+        "name": "textContent_cta",
         "value": "",
         "label": "Text",
         "valueType": "string"
